@@ -89,10 +89,10 @@ int main(int argc, char *argv[]) {
 		}
 		
 		//2.2 printing operation by function pointer (list_repeatFunc() is called here)
-		
+		 
 		//2.3 print number of movies
-	 
-	  
+		line_number(); 
+		printf("읽은 영화 갯수는 %i개입니다.", line);
 
 
 	
