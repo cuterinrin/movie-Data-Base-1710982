@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	int (*repFunc)(void* obj, void* arg); //function pointer for using list_repeatFunc() function
 	void *arg; //a void pointer for passing argument to repFunc
 	int cnt; //integer variable
-	
+	char c;
 //1. reading the movie.dat-----------------------------
 	//1.1 FILE open
 	fp = fopen("movie.dat","r");//함수열기  
@@ -28,10 +28,10 @@ int main(int argc, char *argv[]) {
 	list = list_genList();
 	
 	//1.3 read each movie data from the file and add it to the linked list
-	while ( /* read name, country, runtime and score*/!= NULL )
+	while ( /* read name, country, runtime and score*/(c=fgetc(fp))!=EOF)
 	{	
 		//generate a movie info instance(mvInfo) with function mv_genMvInfo() 
-    	sscanf(fp, %s%i%s,&name,&runTime,&country,&score);//sscanf함수 - 형식에 맞춰 나눠서 저장  
+    	sscanf(fp, "%s %s %i %f", &name, &country, &runTime, &score);//sscanf함수 - 형식에 맞춰 나눠서 저장  
         
 		list_addTail(mvInfo, list);
 	}
@@ -58,28 +58,28 @@ int main(int argc, char *argv[]) {
 			case 1: //print all the movies
 				printf("\nprinting all the movies in the list.....\n\n\n");
 				printf("----------------------------------------\n");
-				
+				mv_printAll(obj, arg);
+
 				repFunc = mv_printAll;
 				arg = NULL;
 				break;
 				
 			case 2: //print movies of specific country
-				printf("%s", name);
-				break;
+				mv_printCountry(obj, arg);
 				
 			case 3: //print movies with long runtime
-				printf("%s", runTime);
+				mv_printRunTime(obj, arg);
 
 				break;
 				
 			case 4: //print movies with high score
-				printf("%s", score);
+				mv_printScore(obj, arg);
 
 				break;
 				
 			case 5:
 				printf("\n\nBye!\n\n");
-				exit_flag = 1;
+				exit_flag = 1;//exit_flag가 0일때 while계속>1이면 나감 
 				
 				break;
 				
@@ -89,7 +89,8 @@ int main(int argc, char *argv[]) {
 		}
 		
 		//2.2 printing operation by function pointer (list_repeatFunc() is called here)
-		 
+		list_repeatFunc((*func)(*obj, *arg), *arg, *list); //repeat processing func for each node objects
+
 		//2.3 print number of movies
 		line_number(); 
 		printf("읽은 영화 갯수는 %i개입니다.", line);
