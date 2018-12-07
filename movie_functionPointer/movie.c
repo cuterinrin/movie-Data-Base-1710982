@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "movie.h"
-
+#define mov 10
 //structure definition
 typedef struct movInfo {
 	char name[100];
@@ -41,15 +41,14 @@ int mv_printAll(void* obj, void* arg)
 	//파일열기 
 	fp=fopen("movie.txt","r");	
 
-	for(i=0;i<10;i++){//구조체 배열에 각각 영화정보 넣기 
+	for(i=0;i<mov;i++){//구조체 배열에 각각 영화정보 넣기 
 		fscanf(fp,"%s %s %i %f", &movInfo_t.name[i], &movInfo_t.madeIn[i], &movInfo_t.runTime[i], &movInfo_t.score[i]);
 		}
 
-	for(i=0;i<10;i++){//각각 프린트 
-		printf("--------------------------------------------");
+	for(i=0;i<mov;i++){//각각 프린트 
+		printf("--------------------------------------------\n");
 		printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", &movInfo_t.name[i], &movInfo_t.madeIn[i], &movInfo_t.runTime[i], &movInfo_t.score[i]);
 	}
-		printf("--------------------------------------------");
 
 	fclose(fp);//파일닫기 
 
@@ -59,17 +58,32 @@ int mv_printAll(void* obj, void* arg)
 
 int mv_printScore(void* obj, void* arg)
 {
-	
+	for(i=0;i<mov;i++){
+		if(movInfo_t.score[i]>score){	
+			printf("--------------------------------------------\n");
+			printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", &movInfo_t.name[i], &movInfo_t.madeIn[i], &movInfo_t.runTime[i], &movInfo_t.score[i]);
+		}
+	}
 }
 
 int mv_printRunTime(void* obj, void* arg)
 {
-	
+		for(i=0;i<mov;i++){
+		if(movInfo_t.runTime[i]>runTime){	
+			printf("--------------------------------------------\n");
+			printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", &movInfo_t.name[i], &movInfo_t.madeIn[i], &movInfo_t.runTime[i], &movInfo_t.score[i]);
+		}
+	}
 }
 
 int mv_printCountry(void* obj, void* arg)
 {
-	
+		for(i=0;i<mov;i++){
+		if(movInfo_t.madeIn[i] == country){	
+			printf("--------------------------------------------\n");
+			printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", &movInfo_t.name[i], &movInfo_t.madeIn[i], &movInfo_t.runTime[i], &movInfo_t.score[i]);
+		}
+	}
 }
 
 
