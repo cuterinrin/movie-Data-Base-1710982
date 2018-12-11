@@ -5,21 +5,21 @@
 
 //structure definition
 
-struct movInfo movInfo_t[100];
+struct movInfo movInfo_t[2000];
 	
 
 #if 1
 
-int mv_printAll(void *mv, int cnt)
+int mv_printAll(struct movInfo* mv, int cnt)
 {		
 	int i = 0;
 	
 	for(i=0;i<cnt;i++){//각각 프린트 
 		printf("--------------------------------------------\n");
-		printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", movInfo_t[i].name, movInfo_t[i].country, movInfo_t[i].runTime, movInfo_t[i].score);
+		printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", mv[i].name, mv[i].country, mv[i].runTime, mv[i].score);
 	}
-	
-	printf("totaly %i movies are listed!\n", cnt);
+	printf("--------------------------------------------\n");
+	printf("\ntotaly %i movies are listed!\n", cnt);
 
 }
 
@@ -34,11 +34,12 @@ int mv_printScore(struct movInfo* mv, int cnt)
 	for(i=0;i<cnt;i++){//while 로 바꿀 예정 
 		if(mv[i].score>input_score){	
 			printf("--------------------------------------------\n");
-			printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", movInfo_t[i].name, movInfo_t[i].country, movInfo_t[i].runTime, movInfo_t[i].score);
+			printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", mv[i].name, mv[i].country, mv[i].runTime, mv[i].score);
 			score_cnt++;
 		}
 	}
-	printf("totaly %i movies are listed!\n", score_cnt);
+	printf("--------------------------------------------\n");
+	printf("\ntotaly %i movies are listed!\n", score_cnt);
 }
 
 int mv_printRunTime(struct movInfo* mv, int cnt)
@@ -47,7 +48,7 @@ int mv_printRunTime(struct movInfo* mv, int cnt)
 	int input_run;
 
 	printf("lowest runtime : ");
-	scanf("%s", &input_run);
+	scanf("%i", &input_run);
 	
 	for(i=0;i<cnt;i++){
 		if(mv[i].runTime>input_run){	
@@ -56,7 +57,8 @@ int mv_printRunTime(struct movInfo* mv, int cnt)
 			run_cnt++;
 		}
 	}
-	printf("totaly %i movies are listed!\n", run_cnt);
+	printf("--------------------------------------------\n");
+	printf("\ntotaly %i movies are listed!\n", run_cnt);
 }
 
 int mv_printCountry(struct movInfo* mv,int cnt)
@@ -74,7 +76,8 @@ int mv_printCountry(struct movInfo* mv,int cnt)
 			con_cnt++;
 		}
 	}
-	printf("totaly %i movies are listed!\n", con_cnt);
+	printf("--------------------------------------------\n");
+	printf("\ntotaly %i movies are listed!\n", con_cnt);
 }
 
 #endif

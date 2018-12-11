@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]) {
 	
-	struct movInfo movInfo_t[100];
+	struct movInfo movInfo_t[2000];
 	
 	FILE *fp; //FILE pointer for reading movie data 
 	struct movInfo *mv;//구조체 선 언 
@@ -34,7 +34,6 @@ int main(int argc, char *argv[]) {
 	}
 	
 	
-	printf("%s %s %f %i\n", movInfo_t[i-1].name, movInfo_t[i-1].country, movInfo_t[i-1].score, movInfo_t[i-1].runTime);
 
 	//1.4 FILE close
 	fclose(fp);//닫  
@@ -44,13 +43,13 @@ int main(int argc, char *argv[]) {
 	while(exit_flag == 0)
 	{
 		//2.1 print menu message and get input option
-		printf("\n------------------menu------------------\n");
+		printf("\n--------------------menu--------------------\n");
 		printf("1. print all movies\n");
 		printf("2. search for specific country movies\n");
 		printf("3. search for specific runtime movies\n");
 		printf("4. search for specific score\n");
 		printf("5. exit\n");
-		printf("----------------------------------------\n");
+		printf("--------------------------------------------\n");
 		printf("select an option : ");
 		scanf("%i", &option);
 		
@@ -58,10 +57,8 @@ int main(int argc, char *argv[]) {
 		{
 			case 1: //print all the movies
 				printf("\nprinting all the movies in the list.....\n\n\n");
-				for(i=0;i<cnt;i++){//각각 프린트 
-					printf("--------------------------------------------\n");
-					printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", movInfo_t[i].name, movInfo_t[i].country, movInfo_t[i].runTime, movInfo_t[i].score);
-					}
+				
+				mv_printAll(mv, cnt);
 				
 				break;
 				
