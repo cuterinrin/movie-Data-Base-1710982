@@ -51,7 +51,7 @@ int mv_printScore(void *mv)
 			cnt++;
 		}
 	}
-	printf("totaly %i movies are listed!", cnt);
+	printf("totaly %i movies are listed!\n", cnt);
 }
 
 int mv_printRunTime(void* mv)

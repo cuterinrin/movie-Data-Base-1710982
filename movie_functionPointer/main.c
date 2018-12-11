@@ -21,12 +21,12 @@ int main(int argc, char *argv[]) {
 	int option; //user input option
 	char c;
 	int i;
-	int cnt;//줄 수 
+	int cnt=0;//줄 수 ,초기화 
 	
 	mv = movInfo_t;
 	
 	//파일 읽는 중...
-	printf("loading the data files...");
+	printf("loading the data files..\n");
 	
 //1. reading the movie.dat-----------------------------
 	//1.1 FILE open
@@ -34,26 +34,25 @@ int main(int argc, char *argv[]) {
 	
 	while (fscanf(fp,"%s %s %d %f",movInfo_t[i].name,movInfo_t[i].country, &movInfo_t[i].runTime, &movInfo_t[i].score) == 4)
 	{
-		printf("%s %s %d %f\n",movInfo_t[i].name,movInfo_t[i].country, movInfo_t[i].runTime, movInfo_t[i].score);
 		cnt++;
 	}
 	
 
 	//1.4 FILE close
 	fclose(fp);//닫  
-	printf("읽은 영화 갯수는 %i개입니다.", cnt);
+	printf("read done! 읽은 영화 갯수는 %i개입니다.\n", cnt);
 
 //2. program start
 	while(exit_flag == 0)
 	{
 		//2.1 print menu message and get input option
-		printf("-----------------------------------------");
-		printf("1.print all movies ");
-		printf("2. search for specific country movies");
-		printf("3. search for specific runtime movies");
-		printf("4. search for specific score");
-		printf("5. exit");
-		printf("-----------------------------------------");
+		printf("------------------menu------------------\n");
+		printf("1.print all movies\n");
+		printf("2. search for specific country movies\n");
+		printf("3. search for specific runtime movies\n");
+		printf("4. search for specific score\n");
+		printf("5. exit\n");
+		printf("----------------------------------------\n");
 		printf("select an option : ");
 		scanf("%i", &option);
 		
@@ -61,7 +60,6 @@ int main(int argc, char *argv[]) {
 		{
 			case 1: //print all the movies
 				printf("\nprinting all the movies in the list.....\n\n\n");
-				printf("----------------------------------------\n");
 				mv_printAll(mv);
 				
 				break;
