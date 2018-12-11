@@ -7,19 +7,27 @@
 
 int main(int argc, char *argv[]) {
 	
-	FILE *fp; //FILE pointer for reading movie data 
-	char name[200]; //movie name
-	char country[10]; //movie country
-	int runTime; //movie runtime
-	float score; //movie score
+	struct movInfo{//구조체정의 
+		char name[100]; //movie name
+		char country[10]; //movie country	//큰일 - int,fl로하면 이상한값 
+		int runTime; //movie runtime
+		float score; //movie score
+	}movInfo_t[100];
 	
+	FILE *fp; //FILE pointer for reading movie data 
+	struct movInfo *mv;//구조체 선 언 
+	 
 	int exit_flag = 0; //flag variable for while loop
 	int option; //user input option
-	void *list, *mvInfo; //pointers for linked list and a specific structure instance for a movie data
-	int (*repFunc)(void* obj, void* arg); //function pointer for using list_repeatFunc() function
-	void *arg; //a void pointer for passing argument to repFunc
-	int cnt; //integer variable
 	char c;
+	int i;
+	int cnt;
+	
+	mv = movInfo_t;
+	
+	//파일 읽는 중...
+	printf("loading the data files...");
+	
 //1. reading the movie.dat-----------------------------
 	//1.1 FILE open
 	fp = fopen("movie.dat","r");//함수열기  
@@ -27,18 +35,18 @@ int main(int argc, char *argv[]) {
 	//1.2 list generation (use function list_genList() )
 	list = list_genList();
 	
-	//1.3 read each movie data from the file and add it to the linked list
-	while ( /* read name, country, runtime and score*/(c=fgetc(fp))!=EOF)
-	{	
-		//generate a movie info instance(mvInfo) with function mv_genMvInfo() 
-    	sscanf(fp, "%s %s %i %f", &name, &country, &runTime, &score);//sscanf함수 - 형식에 맞춰 나눠서 저장  
-        
-		list_addTail(mvInfo, list);
+	
+	while (fscanf(fp,"%s %s %d %f",movInfo_t[i].name,movInfo_t[i].country, &movInfo_t[i].runTime, &movInfo_t[i].score) == 4)
+	{
+		printf("%s %s %d %f\n",movInfo_t[i].name,movInfo_t[i].country, movInfo_t[i].runTime, movInfo_t[i].score);
+		cnt++;
 	}
+	
 
 	//1.4 FILE close
 	fclose(fp);//닫  
-	
+	printf("읽은 영화 갯수는 %i개입니다.", cnt);
+
 //2. program start
 	while(exit_flag == 0)
 	{
