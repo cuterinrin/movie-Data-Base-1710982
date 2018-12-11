@@ -7,12 +7,7 @@
 
 int main(int argc, char *argv[]) {
 	
-	struct movInfo{//구조체정의 
-		char name[100]; //movie name
-		char country[10]; //movie country	//큰일 - int,fl로하면 이상한값 
-		int runTime; //movie runtime
-		float score; //movie score
-	}movInfo_t[100];
+	struct movInfo movInfo_t[100];
 	
 	FILE *fp; //FILE pointer for reading movie data 
 	struct movInfo *mv;//구조체 선 언 
@@ -20,7 +15,7 @@ int main(int argc, char *argv[]) {
 	int exit_flag = 0; //flag variable for while loop
 	int option; //user input option
 	char c;
-	int i;
+	int i=0;
 	int cnt=0;//줄 수 ,초기화 
 	
 	mv = movInfo_t;
@@ -35,19 +30,22 @@ int main(int argc, char *argv[]) {
 	while (fscanf(fp,"%s %s %d %f",movInfo_t[i].name,movInfo_t[i].country, &movInfo_t[i].runTime, &movInfo_t[i].score) == 4)
 	{
 		cnt++;
+		i++;
 	}
 	
+	
+	printf("%s %s %f %i\n", movInfo_t[i-1].name, movInfo_t[i-1].country, movInfo_t[i-1].score, movInfo_t[i-1].runTime);
 
 	//1.4 FILE close
 	fclose(fp);//닫  
 	printf("read done! 읽은 영화 갯수는 %i개입니다.\n", cnt);
-
+#if 1
 //2. program start
 	while(exit_flag == 0)
 	{
 		//2.1 print menu message and get input option
-		printf("------------------menu------------------\n");
-		printf("1.print all movies\n");
+		printf("\n------------------menu------------------\n");
+		printf("1. print all movies\n");
 		printf("2. search for specific country movies\n");
 		printf("3. search for specific runtime movies\n");
 		printf("4. search for specific score\n");
@@ -60,22 +58,25 @@ int main(int argc, char *argv[]) {
 		{
 			case 1: //print all the movies
 				printf("\nprinting all the movies in the list.....\n\n\n");
-				mv_printAll(mv);
+				for(i=0;i<cnt;i++){//각각 프린트 
+					printf("--------------------------------------------\n");
+					printf("NAME : %s (%s) \nRunning Time : %i, Score : %3f\n", movInfo_t[i].name, movInfo_t[i].country, movInfo_t[i].runTime, movInfo_t[i].score);
+					}
 				
 				break;
 				
 			case 2: //print movies of specific country
-				mv_printCountry(mv);
+				mv_printCountry(mv, cnt);
 				
 				break;
 
 			case 3: //print movies with long runtime
-				mv_printRunTime(mv);
+				mv_printRunTime(mv, cnt);
 
 				break;
 				
 			case 4: //print movies with high score
-				mv_printScore(mv);
+				mv_printScore(mv, cnt);
 
 				break;
 				
@@ -91,6 +92,6 @@ int main(int argc, char *argv[]) {
 		}
 		
 	}
-	
+	#endif
 	return 0;
 }
