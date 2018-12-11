@@ -5,7 +5,7 @@
 
 //structure definition
 
-struct movInfo movInfo_t[2000];
+struct movInfo movInfo_t[2000]; 
 	
 
 #if 1
@@ -24,9 +24,9 @@ int mv_printAll(struct movInfo* mv, int cnt)//모든 영화를 출력하는 함수
 }
 
 int mv_printScore(struct movInfo* mv, int cnt)//일정 점수이상의 영화를 출력하는 함수 
-{	int score_cnt=0;
+{	int score_cnt=0;//검색될 영화 갯수 변수 지정  
 	int i=0;
-	float input_score;
+	float input_score;//검색할 점수 변수 지정 
 	
 	printf("lowest score : ");
 	scanf("%f", &input_score);//점수 입력받음 
@@ -43,9 +43,9 @@ int mv_printScore(struct movInfo* mv, int cnt)//일정 점수이상의 영화를 출력하는 
 }
 
 int mv_printRunTime(struct movInfo* mv, int cnt)
-{	int run_cnt=0;
+{	int run_cnt=0;//검색될 영화 갯수 변수 지정 
 	int i =0;
-	int input_run;
+	int input_run;//검색할 상영 시간 변수 지정 
 
 	printf("lowest runtime : ");
 	scanf("%i", &input_run);//상영시간 입력받음 
@@ -62,9 +62,9 @@ int mv_printRunTime(struct movInfo* mv, int cnt)
 }
 
 int mv_printCountry(struct movInfo* mv,int cnt)
-{	int con_cnt=0;
+{	int con_cnt=0;//검색될 영화 갯수 변수 지정 
 	int i =0;
-	char input_con[20];//글자는 배열에 저장될 때 한글자씩 되므로 배열로 선언 
+	char input_con[20];//검색할 나라, 글자는 배열에 저장될 때 한글자씩 되므로 배열로 선언 
 	 
 	printf("select country : "); 
 	scanf("%s", input_con);//나라 입력받음, 문자열 > 배열에 글자 저장 
