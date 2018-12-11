@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 	int option; //user input option
 	char c;
 	int i;
-	int cnt;
+	int cnt;//줄 수 
 	
 	mv = movInfo_t;
 	
@@ -30,11 +30,7 @@ int main(int argc, char *argv[]) {
 	
 //1. reading the movie.dat-----------------------------
 	//1.1 FILE open
-	fp = fopen("movie.dat","r");//함수열기  
-	
-	//1.2 list generation (use function list_genList() )
-	list = list_genList();
-	
+	fp = fopen("movie.dat","r");//함수열기  	
 	
 	while (fscanf(fp,"%s %s %d %f",movInfo_t[i].name,movInfo_t[i].country, &movInfo_t[i].runTime, &movInfo_t[i].score) == 4)
 	{
@@ -66,22 +62,22 @@ int main(int argc, char *argv[]) {
 			case 1: //print all the movies
 				printf("\nprinting all the movies in the list.....\n\n\n");
 				printf("----------------------------------------\n");
-				mv_printAll(obj, arg);
-
-				repFunc = mv_printAll;
-				arg = NULL;
+				mv_printAll(mv);
+				
 				break;
 				
 			case 2: //print movies of specific country
-				mv_printCountry(obj, arg);
+				mv_printCountry(mv);
 				
+				break;
+
 			case 3: //print movies with long runtime
-				mv_printRunTime(obj, arg);
+				mv_printRunTime(mv);
 
 				break;
 				
 			case 4: //print movies with high score
-				mv_printScore(obj, arg);
+				mv_printScore(mv);
 
 				break;
 				
@@ -96,14 +92,7 @@ int main(int argc, char *argv[]) {
 				break;
 		}
 		
-		//2.2 printing operation by function pointer (list_repeatFunc() is called here)
-		list_repeatFunc((*func)(*obj, *arg), *arg, *list); //repeat processing func for each node objects
-
-		//2.3 print number of movies
-		line_number(); 
-		printf("읽은 영화 갯수는 %i개입니다.", line);
-
-
+	}
 	
 	return 0;
 }
